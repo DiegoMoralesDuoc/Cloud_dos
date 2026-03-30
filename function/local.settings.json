@@ -1,0 +1,11 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "java",
+
+    "DB_URL": "jdbc:oracle:thin:@diegomoralesalfarobd_high?TNS_ADMIN=src/main/resources/Wallet_DiegoMoralesAlfaroBD",
+    "DB_USER": "ADMIN",
+    "DB_PASSWORD": "Janemba!isthenumber1"
+  }
+}
