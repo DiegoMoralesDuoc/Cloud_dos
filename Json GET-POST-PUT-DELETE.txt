@@ -1,0 +1,65 @@
+
+
+
+--------------------------POST--------------------------
+crearPrestamo 
+https://dma-d8hrbce9hcd4dmgt.eastus2-01.azurewebsites.net/api/crearPrestamo
+
+{
+  "id_usuario": "2",
+  "id_libro": "2"
+}
+
+crearUsuario 
+https://dma-d8hrbce9hcd4dmgt.eastus2-01.azurewebsites.net/api/crearUsuario
+
+{
+  "nombre": "Diego2",
+  "apellidos": "Morales2",
+  "correo": "diego2@mail.com",
+  "password": "1234567"
+}
+
+--------------------------PUT--------------------------
+
+actualizarUsuario 
+https://dma-d8hrbce9hcd4dmgt.eastus2-01.azurewebsites.net/api/actualizarUsuario
+
+{
+  "id_usuario": "1",
+  "nombre": "Diego",
+  "apellidos": "Morales Soto",
+  "correo": "diegoeditado@mail.com",
+  "password": "654321"
+}
+
+devolverPrestamo 
+https://dma-d8hrbce9hcd4dmgt.eastus2-01.azurewebsites.net/api/devolverPrestamo
+
+{
+  "id": "1"
+}
+
+
+--------------------------DELETE--------------------------
+eliminarPrestamo 
+https://dma-d8hrbce9hcd4dmgt.eastus2-01.azurewebsites.net/api/eliminarPrestamo
+
+DELETE /api/eliminarPrestamo?id=1
+
+
+eliminarUsuario 
+https://dma-d8hrbce9hcd4dmgt.eastus2-01.azurewebsites.net/api/eliminarUsuario
+
+DELETE /api/eliminarUsuario?id=1
+
+
+--------------------------GET--------------------------
+obtenerLibros 
+https://dma-d8hrbce9hcd4dmgt.eastus2-01.azurewebsites.net/api/obtenerLibros
+
+obtenerPrestamos 
+https://dma-d8hrbce9hcd4dmgt.eastus2-01.azurewebsites.net/api/obtenerPrestamos
+
+obtenerUsuarios 
+https://dma-d8hrbce9hcd4dmgt.eastus2-01.azurewebsites.net/api/obtenerUsuarios
