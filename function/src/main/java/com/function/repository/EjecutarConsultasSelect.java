@@ -8,13 +8,6 @@ import com.function.OracleConnection;
 import com.function.util.JsonUtil;
 import com.microsoft.azure.functions.ExecutionContext;
 
-import com.microsoft.azure.functions.*;
-import com.microsoft.azure.functions.annotation.*;
-
-import java.util.Optional;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 public class EjecutarConsultasSelect {
 
     public String ejecutarConsultaSelect(String sql, ExecutionContext context) throws Exception {

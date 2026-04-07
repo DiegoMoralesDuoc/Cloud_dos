@@ -2,20 +2,14 @@ package com.function.util;
 
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
-import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.microsoft.azure.functions.ExecutionContext;
-import com.microsoft.azure.functions.HttpRequestMessage;
-import com.microsoft.azure.functions.HttpResponseMessage;
-import com.microsoft.azure.functions.HttpStatus;
-
-import com.function.OracleConnection;
 
 public class JsonUtil {
 
-    private void logPublicIp(ExecutionContext context) {
+    public static void logPublicIp(ExecutionContext context) {
         try {
             java.net.URL ipUrl = new java.net.URL("https://api.ipify.org");
             java.io.BufferedReader br = new java.io.BufferedReader(
@@ -29,7 +23,7 @@ public class JsonUtil {
         }
     }
 
-    private String extraerCampo(String json, String campo) {
+    public static String extraerCampo(String json, String campo) {
         Pattern pattern = Pattern.compile("\"" + campo + "\"\\s*:\\s*\"([^\"]+)\"");
         Matcher matcher = pattern.matcher(json);
 
@@ -40,25 +34,7 @@ public class JsonUtil {
         return matcher.group(1);
     }
 
-    private HttpResponseMessage successResponse(HttpRequestMessage<Optional<String>> request, String mensaje) {
-        return request.createResponseBuilder(HttpStatus.OK)
-            .header("Content-Type", "application/json")
-            .body("{\"mensaje\":\"" + escapeJson(mensaje) + "\"}")
-            .build();
-    }
-
-    private HttpResponseMessage crearRespuestaError(
-        HttpRequestMessage<Optional<String>> request,
-        HttpStatus status,
-        String mensaje
-    ) {
-        return request.createResponseBuilder(status)
-            .header("Content-Type", "application/json")
-            .body("{\"error\":\"" + escapeJson(mensaje) + "\"}")
-            .build();
-    }
-
-    private String resultSetToJson(ResultSet rs) throws Exception {
+    public static String resultSetToJson(ResultSet rs) throws Exception {
         StringBuilder json = new StringBuilder();
         ResultSetMetaData meta = rs.getMetaData();
         int columnCount = meta.getColumnCount();
@@ -102,7 +78,7 @@ public class JsonUtil {
         return json.toString();
     }
 
-    private String escapeJson(String text) {
+    public static String escapeJson(String text) {
         if (text == null) {
             return "";
         }
@@ -112,15 +88,5 @@ public class JsonUtil {
             .replace("\n", "\\n")
             .replace("\r", "\\r")
             .replace("\t", "\\t");
-    }
-
-    private void cerrarSilencioso(AutoCloseable resource) {
-        if (resource != null) {
-            try {
-                resource.close();
-            } catch (Exception e) {
-                // Ignorar cierre
-            }
-        }
     }
 }

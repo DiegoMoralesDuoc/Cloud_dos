@@ -2,17 +2,11 @@ package com.function.rest;
 
 import java.util.Optional;
 
+import com.function.service.PrestamoService;
 import com.function.util.JsonUtil;
 import com.function.util.ResponseUtil;
 import com.microsoft.azure.functions.*;
 import com.microsoft.azure.functions.annotation.*;
-
-import com.function.OracleConnection;
-import com.function.Function;
-import com.function.repository.*;
-import com.function.util.*;
-import com.function.service.*;
-
 
 public class PrestamosRestFunction {
 
