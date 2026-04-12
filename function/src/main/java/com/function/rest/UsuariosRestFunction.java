@@ -8,11 +8,6 @@ import com.function.util.ResponseUtil;
 import com.microsoft.azure.functions.*;
 import com.microsoft.azure.functions.annotation.*;
 
-import com.function.OracleConnection;
-import com.function.Function;
-import com.function.repository.*;
-
-
 public class UsuariosRestFunction {
 
     private final UsuarioService service = new UsuarioService();
@@ -66,7 +61,82 @@ public class UsuariosRestFunction {
                     .build();
 
         } catch (Exception e) {
+            context.getLogger().severe("Error en obtenerUsuarios: " + e.getMessage());
             return ResponseUtil.crearRespuestaError(request, HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
+        }
+    }
+
+    @FunctionName("modificarUsuario")
+    public HttpResponseMessage modificarUsuario(
+            @HttpTrigger(
+                name = "req",
+                methods = {HttpMethod.PUT},
+                authLevel = AuthorizationLevel.ANONYMOUS)
+                HttpRequestMessage<Optional<String>> request,
+            final ExecutionContext context) {
+
+        try {
+            String body = request.getBody().orElse(null);
+
+            if (body == null || body.isBlank()) {
+                return ResponseUtil.crearRespuestaError(request, HttpStatus.BAD_REQUEST, "El body es obligatorio");
+            }
+
+            int id = Integer.parseInt(JsonUtil.extraerCampo(body, "id_usuario"));
+            String nombre = JsonUtil.extraerCampo(body, "nombre");
+            String apellidos = JsonUtil.extraerCampo(body, "apellidos");
+            String correo = JsonUtil.extraerCampo(body, "correo");
+            String password = JsonUtil.extraerCampo(body, "password");
+
+            service.modificarUsuario(id, nombre, apellidos, correo, password, context);
+
+            return ResponseUtil.successResponse(request, "Usuario modificado correctamente");
+
+        } catch (NumberFormatException e) {
+            return ResponseUtil.crearRespuestaError(request, HttpStatus.BAD_REQUEST, "El id_usuario debe ser numérico");
+        } catch (Exception e) {
+            context.getLogger().severe("Error en modificarUsuario: " + e.getMessage());
+
+            HttpStatus status = "Usuario no encontrado".equalsIgnoreCase(e.getMessage())
+                    ? HttpStatus.NOT_FOUND
+                    : HttpStatus.INTERNAL_SERVER_ERROR;
+
+            return ResponseUtil.crearRespuestaError(request, status, e.getMessage());
+        }
+    }
+
+    @FunctionName("eliminarUsuario")
+    public HttpResponseMessage eliminarUsuario(
+            @HttpTrigger(
+                name = "req",
+                methods = {HttpMethod.DELETE},
+                authLevel = AuthorizationLevel.ANONYMOUS)
+                HttpRequestMessage<Optional<String>> request,
+            final ExecutionContext context) {
+
+        try {
+            String idParam = request.getQueryParameters().get("id");
+
+            if (idParam == null || idParam.isBlank()) {
+                return ResponseUtil.crearRespuestaError(request, HttpStatus.BAD_REQUEST, "El parámetro id es obligatorio");
+            }
+
+            int id = Integer.parseInt(idParam);
+
+            service.eliminarUsuario(id, context);
+
+            return ResponseUtil.successResponse(request, "Usuario eliminado correctamente");
+
+        } catch (NumberFormatException e) {
+            return ResponseUtil.crearRespuestaError(request, HttpStatus.BAD_REQUEST, "El id debe ser numérico");
+        } catch (Exception e) {
+            context.getLogger().severe("Error en eliminarUsuario: " + e.getMessage());
+
+            HttpStatus status = "Usuario no encontrado".equalsIgnoreCase(e.getMessage())
+                    ? HttpStatus.NOT_FOUND
+                    : HttpStatus.INTERNAL_SERVER_ERROR;
+
+            return ResponseUtil.crearRespuestaError(request, status, e.getMessage());
         }
     }
 }

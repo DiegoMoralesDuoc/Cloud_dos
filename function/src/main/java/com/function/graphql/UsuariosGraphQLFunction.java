@@ -76,7 +76,7 @@ public class UsuariosGraphQLFunction {
                         .build();
             }
 
-            if (query.contains("actualizarUsuario")) {
+            if (query.contains("modificarUsuario")) {
                 Integer idUsuario = extraerEntero(query, "idUsuario");
                 String nombre = extraerString(query, "nombre");
                 String apellidos = extraerString(query, "apellidos");
@@ -86,15 +86,15 @@ public class UsuariosGraphQLFunction {
                 if (idUsuario == null || nombre == null || apellidos == null || correo == null || password == null) {
                     return request.createResponseBuilder(HttpStatus.BAD_REQUEST)
                             .header("Content-Type", "application/json")
-                            .body("{\"error\":\"Faltan parámetros para actualizarUsuario\"}")
+                            .body("{\"error\":\"Faltan parámetros para modificarUsuario\"}")
                             .build();
                 }
 
-                int filas = usuarioService.actualizarUsuario(idUsuario, nombre, apellidos, correo, password, context);
+                usuarioService.modificarUsuario(idUsuario, nombre, apellidos, correo, password, context);
 
                 return request.createResponseBuilder(HttpStatus.OK)
                         .header("Content-Type", "application/json")
-                        .body("{\"data\":{\"actualizarUsuario\":\"Filas afectadas: " + filas + "\"}}")
+                        .body("{\"data\":{\"modificarUsuario\":\"Usuario modificado correctamente\"}}")
                         .build();
             }
 
@@ -108,11 +108,11 @@ public class UsuariosGraphQLFunction {
                             .build();
                 }
 
-                int filas = usuarioService.eliminarUsuario(idUsuario, context);
+                usuarioService.eliminarUsuario(idUsuario, context);
 
                 return request.createResponseBuilder(HttpStatus.OK)
                         .header("Content-Type", "application/json")
-                        .body("{\"data\":{\"eliminarUsuario\":\"Filas afectadas: " + filas + "\"}}")
+                        .body("{\"data\":{\"eliminarUsuario\":\"Usuario eliminado correctamente\"}}")
                         .build();
             }
 
@@ -122,6 +122,8 @@ public class UsuariosGraphQLFunction {
                     .build();
 
         } catch (Exception e) {
+            context.getLogger().severe("Error en usuariosGraphQL: " + e.getMessage());
+
             return request.createResponseBuilder(HttpStatus.INTERNAL_SERVER_ERROR)
                     .header("Content-Type", "application/json")
                     .body("{\"error\":\"" + escaparJson(e.getMessage()) + "\"}")
