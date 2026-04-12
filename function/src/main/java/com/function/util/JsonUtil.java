@@ -5,9 +5,13 @@ import java.sql.ResultSetMetaData;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.microsoft.azure.functions.ExecutionContext;
 
 public class JsonUtil {
+
+    private static final ObjectMapper mapper = new ObjectMapper();
 
     public static void logPublicIp(ExecutionContext context) {
         try {
@@ -32,6 +36,14 @@ public class JsonUtil {
         }
 
         return matcher.group(1);
+    }
+
+    public static <T> T fromJson(String json, TypeReference<T> typeReference) throws Exception {
+        return mapper.readValue(json, typeReference);
+    }
+
+    public static String toJson(Object obj) throws Exception {
+        return mapper.writeValueAsString(obj);
     }
 
     public static String resultSetToJson(ResultSet rs) throws Exception {

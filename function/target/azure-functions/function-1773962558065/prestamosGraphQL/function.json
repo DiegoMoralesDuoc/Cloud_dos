@@ -1,11 +1,12 @@
 {
   "scriptFile" : "../function-1.0-SNAPSHOT.jar",
-  "entryPoint" : "com.function.Function.actualizarUsuario",
+  "entryPoint" : "com.function.graphql.PrestamosGraphQLFunction.ejecutar",
   "bindings" : [ {
     "type" : "httpTrigger",
     "direction" : "in",
     "name" : "req",
-    "methods" : [ "PUT" ],
+    "route" : "graphql/prestamos",
+    "methods" : [ "POST" ],
     "authLevel" : "ANONYMOUS"
   }, {
     "type" : "http",

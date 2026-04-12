@@ -1,2 +1,17 @@
+com\function\graphql\UsuariosGraphQLFunction.class
+com\function\repository\UsuarioRepository.class
+com\function\repository\EjecutarConsultasSelect.class
+com\function\rest\PrestamosRestFunction.class
+com\function\graphql\PrestamosGraphQLFunction.class
 com\function\Function.class
+com\function\repository\PrestamoRepository.class
+com\function\repository\LibroRepository.class
+com\function\rest\UsuariosRestFunction.class
+com\function\graphql\PrestamosGraphQLFunction$1.class
+com\function\service\PrestamoService.class
 com\function\OracleConnection.class
+com\function\service\UsuarioService.class
+com\function\graphql\UsuariosGraphQLFunction$1.class
+com\function\util\ResponseUtil.class
+com\function\util\JsonUtil.class
+com\function\repository\PrestamoRepository$PrestamoData.class

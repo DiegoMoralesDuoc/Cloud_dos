@@ -1,11 +1,12 @@
 {
   "scriptFile" : "../function-1.0-SNAPSHOT.jar",
-  "entryPoint" : "com.function.Function.eliminarUsuario",
+  "entryPoint" : "com.function.graphql.UsuariosGraphQLFunction.ejecutar",
   "bindings" : [ {
     "type" : "httpTrigger",
     "direction" : "in",
     "name" : "req",
-    "methods" : [ "DELETE" ],
+    "route" : "graphql/usuarios",
+    "methods" : [ "POST" ],
     "authLevel" : "ANONYMOUS"
   }, {
     "type" : "http",

@@ -1,6 +1,6 @@
 {
   "scriptFile" : "../function-1.0-SNAPSHOT.jar",
-  "entryPoint" : "com.function.Function.eliminarPrestamo",
+  "entryPoint" : "com.function.rest.PrestamosRestFunction.eliminarPrestamo",
   "bindings" : [ {
     "type" : "httpTrigger",
     "direction" : "in",

@@ -63,3 +63,57 @@ https://dma-d8hrbce9hcd4dmgt.eastus2-01.azurewebsites.net/api/obtenerPrestamos
 
 obtenerUsuarios 
 https://dma-d8hrbce9hcd4dmgt.eastus2-01.azurewebsites.net/api/obtenerUsuarios
+
+
+
+
+
+-----------------------------GRAPHQL--------------------------
+POST
+
+-------PRESTAMOS
+https://dma-d8hrbce9hcd4dmgt.eastus2-01.azurewebsites.net/api/graphql/prestamos
+
+----OBTENER PRESTAMOS
+{
+  "query": "{ obtenerPrestamos }"
+}
+
+----CREAR PRESTAMO
+{
+  "query": "mutation { crearPrestamo(idUsuario: 1, idLibro: 1) }"
+}
+
+----DEVOLVER (ACTUALIZAR) PRESTAMO
+{
+  "query": "mutation { devolverPrestamo(idPrestamo: 4) }"
+}
+
+
+----ELIMINAR PRESTAMO
+{
+  "query": "mutation { eliminarPrestamo(idPrestamo: 1) }"
+}
+
+-------USUARIOS
+https://dma-d8hrbce9hcd4dmgt.eastus2-01.azurewebsites.net/api/graphql/usuarios
+
+----OBTENER USUARIOS
+{
+  "query": "{ obtenerUsuarios }"
+}
+
+----CREAR USUARIO
+{
+  "query": "mutation { crearUsuario(nombre: \"Pedro\", apellidos: \"Gonzalez\", correo: \"pedro@test.com\", password: \"123456\") }"
+}
+
+----ACTUALIZAR USUARIO
+{
+  "query": "mutation { actualizarUsuario(idUsuario: 7, nombre: \"DiegoUpdate\", apellidos: \"MoralesUpdate\", correo: \"diego_update@mail.com\", password: \"999999\") }"
+}
+
+----ELIMINAR USUARIO
+{
+  "query": "mutation { eliminarUsuario(idUsuario: 7) }"
+}

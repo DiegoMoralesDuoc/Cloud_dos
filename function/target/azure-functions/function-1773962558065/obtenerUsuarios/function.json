@@ -1,6 +1,6 @@
 {
   "scriptFile" : "../function-1.0-SNAPSHOT.jar",
-  "entryPoint" : "com.function.Function.obtenerUsuarios",
+  "entryPoint" : "com.function.rest.UsuariosRestFunction.obtenerUsuarios",
   "bindings" : [ {
     "type" : "httpTrigger",
     "direction" : "in",

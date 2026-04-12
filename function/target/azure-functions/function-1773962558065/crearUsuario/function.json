@@ -1,6 +1,6 @@
 {
   "scriptFile" : "../function-1.0-SNAPSHOT.jar",
-  "entryPoint" : "com.function.Function.crearUsuario",
+  "entryPoint" : "com.function.rest.UsuariosRestFunction.crearUsuario",
   "bindings" : [ {
     "type" : "httpTrigger",
     "direction" : "in",
